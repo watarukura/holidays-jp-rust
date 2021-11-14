@@ -30,17 +30,17 @@ async fn main() {
     let holidays: Holidays = surf::get(uri).recv_json().await.unwrap();
 
     let is_holiday = holidays.iter().find(|h| h.date == today || h.date == tomorrow).is_some();
-    // println!("{}", is_holiday);
+    if is_holiday {
+        println!("{}", "holiday");
+        exit(1)
+    }
 
     let weekday_today: String = specified_date.format("%a").to_string();
     let weekend_names = ["Fri".to_string(), "Sat".to_string(), "Sun".to_string()];
     let is_weekend: bool = weekend_names.contains(&weekday_today);
-    // println!("{}", is_weekend);
-
-    let is_holiday_or_weekend = is_holiday || is_weekend;
-
-    exit(match is_holiday_or_weekend {
-        true => 1,
-        _ => 0
-    });
+    if is_weekend {
+        println!("{}", "weekend");
+        exit(1)
+    }
+    exit(0)
 }
