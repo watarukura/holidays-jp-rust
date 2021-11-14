@@ -60,8 +60,8 @@ mod tests {
     async fn is_holiday_test() {
         let new_year_day = Local::datetime_from_str(&Local, "2022-01-01T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
         assert!(is_holiday(new_year_day, get_holidays().await));
-        let november_1st = Local::datetime_from_str(&Local, "2021-11-01T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        assert!(!is_holiday(november_1st, get_holidays().await));
+        let november_1st_2021 = Local::datetime_from_str(&Local, "2021-11-01T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
+        assert!(!is_holiday(november_1st_2021, get_holidays().await));
     }
 
     #[test]
