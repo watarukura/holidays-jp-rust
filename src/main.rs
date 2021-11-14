@@ -53,7 +53,7 @@ fn is_weekend(specified_date: DateTime<Local>) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use chrono::{Local, TimeZone};
+    use chrono::{Duration, Local, TimeZone};
     use crate::{get_holidays, is_holiday, is_weekend};
 
     #[async_std::test]
@@ -67,12 +67,12 @@ mod tests {
     #[test]
     fn is_weekend_test() {
         let monday = Local::datetime_from_str(&Local, "2021-11-01T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        let tuesday= Local::datetime_from_str(&Local, "2021-11-02T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        let wednesday = Local::datetime_from_str(&Local, "2021-11-03T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        let thursday = Local::datetime_from_str(&Local, "2021-11-04T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        let friday = Local::datetime_from_str(&Local, "2021-11-05T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        let saturday = Local::datetime_from_str(&Local, "2021-11-06T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
-        let sunday = Local::datetime_from_str(&Local, "2021-11-07T00:00:00+0900", "%Y-%m-%dT%H:%M:%S+0900").unwrap();
+        let tuesday= monday + Duration::days(1);
+        let wednesday = monday + Duration::days(2);
+        let thursday =  monday + Duration::days(3);
+        let friday =  monday + Duration::days(4);
+        let saturday =  monday + Duration::days(5);
+        let sunday =  monday + Duration::days(6);
         assert!(!is_weekend(monday));
         assert!(!is_weekend(tuesday));
         assert!(!is_weekend(wednesday));
